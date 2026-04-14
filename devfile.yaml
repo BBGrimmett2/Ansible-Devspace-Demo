@@ -66,4 +66,4 @@ commands:
 events:
   preStart:
     - prep-workspace
-    - prep-python-venv
+    # - prep-python-venv
