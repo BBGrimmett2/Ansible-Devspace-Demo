@@ -63,7 +63,24 @@ commands:
       component: prep-python-venv
       label: Pre Start Python Prep
     id: prep-python-venv
-events:
-  preStart:
-    - prep-workspace
-    # - prep-python-venv
+# events:
+#   preStart:
+#     - prep-workspace
+#     # - prep-python-venv
+# schemaVersion: 2.3.0
+# metadata:
+#   name: ansible-devspaces-demo
+# components:
+#   - container:
+#       args: ['tail', '-f', '/dev/null']
+#       image: 'quay.io/rhn_ssp_adworjan/ansibledevspaces:latest'
+#       memoryRequest: 256M
+#       memoryLimit: 6Gi
+#       cpuRequest: 250m
+#       cpuLimit: 2000m
+#       env:
+#         - name: HOME
+#           value: /projects/home
+#         - name: VSCODE_DEFAULT_WORKSPACE
+#           value: ${PROJECT_SOURCE}/.code-workspace
+#     name: ansible
