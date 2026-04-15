@@ -31,3 +31,29 @@ commands:
     group:
       kind: run
   id: build-ee
+- exec:
+    label: "Syntax Check All Playbooks"
+    component: dev-tools
+    workingDir: ${PROJECT_SOURCE}
+    commandLine: >
+      for pb in playbooks/*.yml; do
+        echo "Checking $pb";
+        ansible-playbook "$pb" --syntax-check || exit 1;
+      done
+  id: syntax-all
+- exec:
+    label: "Run Hello-World Playbook (Check Mode)"
+    component: dev-tools
+    workingDir: ${PROJECT_SOURCE}
+    commandLine: >
+      ansible-playbook playbooks/site.yml -i inventory/hosts.yml --check --diff
+    group:
+      kind: run
+  id: run-check
+- exec:
+    label: "Lint Ansible"
+    component: dev-tools
+    workingDir: ${PROJECT_SOURCE}
+    commandLine: >
+      ansible-lint
+  id: lint
