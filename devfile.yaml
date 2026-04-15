@@ -16,3 +16,13 @@ components:
         - name: VSCODE_DEFAULT_WORKSPACE
           value: ${PROJECT_SOURCE}/.code-workspace
     name: ansible
+commands:
+- exec:
+    label: "Start Podman Service"
+    component: dev-tools
+    workingDir: ${PROJECTS_ROOT}
+    commandLine: "unset CONTAINER_HOST && podman --log-level debug system service --time=0 unix:///tmp/podman.sock"
+    group:
+      kind: run
+      isDefault: true
+  id: start-podman
