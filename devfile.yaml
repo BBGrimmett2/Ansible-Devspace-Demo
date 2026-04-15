@@ -65,8 +65,8 @@ commands:
     label: "Test Task"
     component: dev-tools
     workingDir: ${PROJECT_SOURCE}
-    commandLine: >
-      ls -lah /; exit 0
+    commandLine: >-
+      /usr/bin/env bash -lc 'set -x; pwd; ls -lah 2>&1; echo "__TASK_DONE__"'
     group:
       kind: run
   id: test-task
