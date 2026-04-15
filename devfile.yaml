@@ -18,11 +18,16 @@ components:
     name: ansible
 commands:
 - exec:
-    label: "Start Podman Service"
+    label: "Build Execution Environment"
     component: dev-tools
-    workingDir: ${PROJECTS_ROOT}
-    commandLine: "unset CONTAINER_HOST && podman --log-level debug system service --time=0 unix:///tmp/podman.sock"
+    workingDir: ${PROJECT_SOURCE}/execution-environment
+    commandLine: >
+      export CONTAINER_HOST=unix:///tmp/podman.sock &&
+      IMAGE_NAME="$(basename ${PROJECT_SOURCE} | tr '[:upper:]' '[:lower:]')" &&
+      IMAGE_TAG="$(git rev-parse --abbrev-ref HEAD | tr '/' '-')-$(date +%Y%m%d-%H%M)" &&
+      ansible-builder build -v3 \
+        -t ${IMAGE_NAME}-ee:${IMAGE_TAG} \
+        -f execution-environment.yml
     group:
       kind: run
-      isDefault: true
-  id: start-podman
+  id: build-ee
