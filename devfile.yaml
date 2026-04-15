@@ -18,7 +18,7 @@ components:
     name: ansible
 commands:
 - exec:
-    label: "Build Execution Environment"
+    label: "Build Local Execution Environment"
     component: dev-tools
     workingDir: ${PROJECT_SOURCE}/execution-environment
     commandLine: >
@@ -40,6 +40,8 @@ commands:
         echo "Checking $pb";
         ansible-playbook "$pb" --syntax-check || exit 1;
       done
+    group:
+      kind: run
   id: syntax-all
 - exec:
     label: "Run Hello-World Playbook (Check Mode)"
@@ -56,4 +58,15 @@ commands:
     workingDir: ${PROJECT_SOURCE}
     commandLine: >
       ansible-lint
+    group:
+      kind: run
   id: lint
+- exec:
+    label: "Test Task"
+    component: dev-tools
+    workingDir: ${PROJECT_SOURCE}
+    commandLine: >
+      ls -lah /
+    group:
+      kind: run
+  id: test-task
